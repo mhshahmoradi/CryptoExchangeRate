@@ -1,8 +1,30 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{843E339B-F287-491B-810B-99E779232550}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{BA93A8E2-FA42-4EA8-8D5C-C0CC43826C93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoExchangeRateApi", "src\CryptoExchangeRateApi\CryptoExchangeRateApi.csproj", "{658203F3-2ABF-4BC4-947F-44A17204E593}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoExchangeRateApi.UnitTests", "tests\CryptoExchangeRateApi.UnitTests\CryptoExchangeRateApi.UnitTests.csproj", "{1D5533D1-5C3B-46A9-AFA3-7CED23F4C107}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{658203F3-2ABF-4BC4-947F-44A17204E593} = {843E339B-F287-491B-810B-99E779232550}
+		{1D5533D1-5C3B-46A9-AFA3-7CED23F4C107} = {BA93A8E2-FA42-4EA8-8D5C-C0CC43826C93}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{658203F3-2ABF-4BC4-947F-44A17204E593}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{658203F3-2ABF-4BC4-947F-44A17204E593}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{658203F3-2ABF-4BC4-947F-44A17204E593}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{658203F3-2ABF-4BC4-947F-44A17204E593}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D5533D1-5C3B-46A9-AFA3-7CED23F4C107}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D5533D1-5C3B-46A9-AFA3-7CED23F4C107}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D5533D1-5C3B-46A9-AFA3-7CED23F4C107}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D5533D1-5C3B-46A9-AFA3-7CED23F4C107}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
