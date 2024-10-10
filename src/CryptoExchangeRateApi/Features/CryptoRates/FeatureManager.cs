@@ -1,3 +1,4 @@
+using CryptoExchangeRateApi.Features.CryptoRates.Common.Services.CryptoRateServices;
 using ServiceCollector.Abstractions;
 
 namespace CryptoExchangeRateApi.Features.CryptoRates;
@@ -11,7 +12,7 @@ public sealed class FeatureManager
     {
         public void AddServices(IServiceCollection serviceCollection)
         {
-            
+            serviceCollection.AddSingleton<ICryptoRateService, CryptoRateService>();
         }
     }
 }
