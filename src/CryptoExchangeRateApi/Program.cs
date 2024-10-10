@@ -10,6 +10,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCarter();
 builder.Services.AddServiceDiscovery();
 builder.Services.ConfigureValidator();
+builder.Services.AddHttpClientServices();
 
 var app = builder.Build();
 
