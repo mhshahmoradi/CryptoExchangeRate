@@ -1,4 +1,5 @@
 using Carter;
+using CryptoExchangeRateApi.Common.Extensions;
 using ServiceCollector.Core;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddCarter();
 builder.Services.AddServiceDiscovery();
+builder.Services.ConfigureValidator();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
