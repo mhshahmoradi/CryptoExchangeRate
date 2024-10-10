@@ -23,7 +23,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Features\" />
+      <Folder Include="Features\CryptoRates\GetCryptoRates\Handlers\" />
+      <Folder Include="Features\CryptoRates\GetCryptoRates\Models\" />
     </ItemGroup>
 
 </Project>
