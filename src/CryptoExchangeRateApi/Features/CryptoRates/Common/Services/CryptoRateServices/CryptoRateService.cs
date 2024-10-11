@@ -8,7 +8,7 @@ namespace CryptoExchangeRateApi.Features.CryptoRates.Common.Services.CryptoRateS
 public sealed class CryptoRateService(IHttpClientFactory httpClientFactory, IApiKeyService apiKeyService)
     : ICryptoRateService
 {
-    private readonly IReadOnlyList<string> _converts = new[] { "USD", "EUR", "BRL", "GBP", "AUD" };
+    private readonly IReadOnlyList<string> _converts = ["USD", "EUR", "BRL", "GBP", "AUD"];
     private readonly HttpClient _httpClient = httpClientFactory.CreateClient();
     private readonly IApiKeyService _apiKeyService = apiKeyService;
     private const string ApiUrl = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest";
