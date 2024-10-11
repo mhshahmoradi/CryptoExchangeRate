@@ -13,6 +13,7 @@ public sealed class Endpoint : ICarterModule
             .MapGet("/api/crypto-rates/{symbol:required}", async ([AsParameters] CryptoRateRequest request) =>
             {
                 return await request.CryptoRateService.GetCryptoRatesAsync(request.Symbol, request.CancellationToken);
-            }).Validator<CryptoRateRequest>();
+            }).Validator<CryptoRateRequest>()
+            .RequireRateLimiting("cryptoRateLimit");
     }
 }

@@ -11,6 +11,7 @@ builder.Services.AddCarter();
 builder.Services.ConfigureValidator();
 builder.Services.AddServiceDiscovery();
 builder.Services.AddHttpClientServices();
+builder.Services.AddRateLimiting();
 
 var app = builder.Build();
 
@@ -21,6 +22,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseRateLimiter();
 app.MapCarter();
 
 app.Run();
