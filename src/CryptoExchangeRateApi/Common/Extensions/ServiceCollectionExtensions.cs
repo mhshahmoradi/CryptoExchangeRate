@@ -4,8 +4,7 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection ConfigureValidator(this IServiceCollection services)
     {
-        services.AddValidatorsFromAssemblyContaining<IAssemblyMarker>();
-
+        services.AddValidatorsFromAssembly(typeof(IAssemblyMarker).Assembly);
         return services;
     }
 }

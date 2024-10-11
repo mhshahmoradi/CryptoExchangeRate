@@ -18,8 +18,9 @@ public sealed class CryptoRateService : ICryptoRateService
         _apiKeyService = apiKeyService;
     }
 
-    public async Task<IReadOnlyList<GetCurrencyRateResponse>> GetCryptoRatesAsync(string symbol, CancellationToken cancellationToken)
+    public async Task<GetCurrencyRateResponse> GetCryptoRatesAsync(string symbol, CancellationToken cancellationToken)
     {
+        var result = new GetCurrencyRateResponse { Symbol = symbol };
         var tasks = _converts.Select(async convert =>
         {
             var apiKey = _apiKeyService.GetNextApiKey();
@@ -35,28 +36,35 @@ public sealed class CryptoRateService : ICryptoRateService
             var response = await _httpClient.SendAsync(request, cancellationToken);
             if (!response.IsSuccessStatusCode)
             {
-                return new GetCurrencyRateResponse
-                {
-                    Error = ValidationError.Failure("Request failed.")
-                };
+                return new CurrencyRateResult { Convert = convert, Price = null, Error = "Request failed" };
             }
 
             var data = await response.Content.ReadFromJsonAsync<CryptoRateResponse>(cancellationToken);
-            if (data.Status.ErrorMessage is not null)
+            if (data!.Status.ErrorMessage is not null || data.Data is null || data.Data.Count == 0)
             {
-                return new GetCurrencyRateResponse
-                {
-                    Error = ValidationError.Failure(data.Status.ErrorCode, data.Status.ErrorMessage)
-                };
+                return new CurrencyRateResult { Convert = convert, Price = null, Error = data.Status.ErrorMessage };
             }
 
-            return new GetCurrencyRateResponse
-            {
-                Response = data
-            };
+            var price = data.Data[symbol].Quote![convert].Price;
+            return new CurrencyRateResult { Convert = convert, Price = price, Error = null };
         });
         
-        var results = await Task.WhenAll(tasks);
-        return results.ToList();
+        var responses = await Task.WhenAll(tasks);
+
+        foreach (var response in responses)
+        {
+            if (response.Error != null)
+            {
+                result.Error = new ValidationError
+                {
+                    Code = 400,
+                    Message = response.Error
+                };
+                break;
+            }
+            result.Prices[response.Convert!] = response.Price;
+        }
+
+        return result;
     }
 }

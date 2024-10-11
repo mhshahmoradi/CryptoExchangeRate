@@ -4,5 +4,5 @@ namespace CryptoExchangeRateApi.Features.CryptoRates.Common.Services.CryptoRateS
 
 public interface ICryptoRateService
 {
-    Task<IReadOnlyList<GetCurrencyRateResponse>> GetCryptoRatesAsync(string symbol, CancellationToken cancellationToken);
+    Task<GetCurrencyRateResponse> GetCryptoRatesAsync(string symbol, CancellationToken cancellationToken);
 }

@@ -1,15 +1,6 @@
-using CryptoExchangeRateApi.Common.Validation;
-
 namespace CryptoExchangeRateApi.Features.CryptoRates.Common.Services.CryptoRateServices.Models;
 
-public sealed class GetCurrencyRateResponse
-{
-    public ValidationError? Error { get; set; }
-    public CryptoRateResponse? Response { get; set; }
-
-    public bool HasError => Error != null;
-}
-public struct CryptoRateResponse
+public sealed class CryptoRateResponse
 {
     public Status Status { get; set; }
     public Dictionary<string, PriceData>? Data { get; set; }
