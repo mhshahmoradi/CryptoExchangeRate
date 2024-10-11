@@ -12,7 +12,8 @@ public sealed class Endpoint : ICarterModule
             .WithTags(FeatureManager.EndpointTagName)
             .MapGet("/api/crypto-rates/{symbol:required}", async ([AsParameters] CryptoRateRequest request) =>
             {
-                return await request.CryptoRateService.GetCryptoRatesAsync(request.Symbol, request.CancellationToken);
+                var result = await request.CryptoRateService.GetCryptoRatesAsync(request.Symbol, request.CancellationToken);
+                return result.HasError ? Results.BadRequest(result) : Results.Ok(result);
             }).Validator<CryptoRateRequest>()
             .RequireRateLimiting("cryptoRateLimit");
     }
