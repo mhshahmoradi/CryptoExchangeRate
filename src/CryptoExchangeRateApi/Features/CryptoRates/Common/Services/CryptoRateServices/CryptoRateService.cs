@@ -5,18 +5,13 @@ using CryptoExchangeRateApi.Infrastructure.Services.ApiKeyServices;
 
 namespace CryptoExchangeRateApi.Features.CryptoRates.Common.Services.CryptoRateServices;
 
-public sealed class CryptoRateService : ICryptoRateService
+public sealed class CryptoRateService(IHttpClientFactory httpClientFactory, IApiKeyService apiKeyService)
+    : ICryptoRateService
 {
     private readonly IReadOnlyList<string> _converts = new[] { "USD", "EUR", "BRL", "GBP", "AUD" };
-    private readonly HttpClient _httpClient;
-    private readonly IApiKeyService _apiKeyService;
+    private readonly HttpClient _httpClient = httpClientFactory.CreateClient();
+    private readonly IApiKeyService _apiKeyService = apiKeyService;
     private const string ApiUrl = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest";
-
-    public CryptoRateService(IHttpClientFactory httpClientFactory, IApiKeyService apiKeyService)
-    {
-        _httpClient = httpClientFactory.CreateClient("CryptoClient");
-        _apiKeyService = apiKeyService;
-    }
 
     public async Task<GetCurrencyRateResponse> GetCryptoRatesAsync(string symbol, CancellationToken cancellationToken)
     {
