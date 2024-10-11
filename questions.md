@@ -1,3 +1,4 @@
+
 1. How long did you spend on the coding assignment? What would you add to
 your solution if you had more time? If you didn't spend much time on the coding
 assignment then use this as an opportunity to explain what you would add.
@@ -6,6 +7,7 @@ Answer: I spent about one day on the coding assignment. I was somewhat focused o
 
 -   The first one was using a **round-robin algorithm** for selecting the API keys, so I could distribute requests across multiple keys and avoid hitting the rate limit.
 -   The second one was due to the fact that our API key was a free version, and it had limitations on retrieving all currency prices in one API call. The service provider imposed this limitation, so I sent 5 simultaneous API calls to reduce the waiting time.
+- The third one was using rate limit for api.
 - The last one is using minimal api and vertical slice to keep project simple and fast.
 
 If I had more time, I would have liked to integrate **Polly** for implementing a **retry mechanism**. Additionally, I would have implemented the **circuit breaker pattern** to route requests to a secondary service when the primary service encounters issues. I would also have added a feature that allows users to set their desired price alerts, and once the currency reaches that price, notifications would be sent to them via various methods like email.
