@@ -42,7 +42,7 @@ public sealed class CryptoRateService : ICryptoRateService
             var data = await response.Content.ReadFromJsonAsync<CryptoRateResponse>(cancellationToken);
             if (data!.Status.ErrorMessage is not null || data.Data is null || data.Data.Count == 0)
             {
-                return new CurrencyRateResult { Convert = convert, Price = null, Error = data.Status.ErrorMessage };
+                return new CurrencyRateResult { Convert = convert, Price = null, Error = "The provided cryptocurrency symbol is invalid." };
             }
 
             var price = data.Data[symbol].Quote![convert].Price;
